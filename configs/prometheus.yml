@@ -1,4 +1,4 @@
-# my global config
+# global config
 global:
   scrape_interval:     15s # By default, scrape targets every 15 seconds.
   evaluation_interval: 15s # By default, scrape targets every 15 seconds.
@@ -16,6 +16,13 @@ scrape_configs:
       - 'tasks.prometheus'
       type: 'A'
       port: 9090
+
+  - job_name: 'traefik'
+    dns_sd_configs:
+    - names:
+      - 'tasks.traefik'
+      type: 'A'
+      port: 8080
 
   - job_name: 'cadvisor'
     dns_sd_configs:
