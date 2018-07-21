@@ -20,6 +20,8 @@ services:
     configs:
       - source: prometheus.yml
         target: /etc/prometheus/prometheus.yml
+      - source: alert.rules
+        target: /etc/prometheus/alert.rules
     networks:
       - prometheus
       - proxy
@@ -100,6 +102,8 @@ services:
 configs:
   prometheus.yml:
     file: ./configs/prometheus.yml
+  alert.rules:
+    file: ./configs/alert.rules
 
 networks:
   prometheus:
