@@ -7,7 +7,6 @@ services:
       - /storage/data/prometheus/data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
-      - '-alertmanager.url=http://alertmanager:9093'
       - '--web.external-url=https://prometheus.intellizy.net'
     deploy:
       labels:
@@ -27,14 +26,14 @@ services:
       - prometheus
       - proxy
 
-alertmanager: 
+  alertmanager:
     image: prom/alertmanager
     volumes:
       - /storage/data/prometheus/alertmanager:/alertmanager
     command:
-      - '-config.file=/etc/alertmanager/config.yml'
-      - '-storage.path=/alertmanager'
-      - '-web.external-url=https://alertmanager.intellizy.net'
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+      - '--web.external-url=https://alertmanager.intellizy.net'
     deploy:
       labels:
         - "traefik.docker.network=proxy"
