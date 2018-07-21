@@ -26,6 +26,29 @@ services:
       - prometheus
       - proxy
 
+alertmanager: 
+    image: prom/alertmanager
+    volumes:
+      - /storage/data/prometheus/alertmanager:/alertmanager
+    command:
+      - '-config.file=/etc/alertmanager/config.yml'
+      - '-storage.path=/alertmanager'
+      - '-web.external-url=https://alertmanager.domain.test'
+    deploy:
+      labels:
+        - "traefik.docker.network=proxy"
+        - "traefik.enable=true"
+        - "traefik.port=9093"
+        - "traefik.backend=monitor_alertmanager"
+        - "traefik.frontend.rule=Host:alertmanager.intellizy.net"
+        #- "traefik.frontend.auth.basic=admin:$$apr1$$..."
+    configs:
+      - source: alertmanager.yml
+        target: /etc/alertmanager/config.yml
+    networks:
+      - prometheus
+      - proxy
+
   grafana:
     image: grafana/grafana
     volumes:
@@ -104,6 +127,8 @@ configs:
     file: ./configs/prometheus.yml
   alert.rules:
     file: ./configs/alert.rules
+  alertmanager.yml:
+    file: ./configs/alertmanager.yml
 
 networks:
   prometheus:

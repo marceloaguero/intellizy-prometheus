@@ -1,0 +1,8 @@
+route:
+ receiver: slack_alertas
+
+receivers:
+- name: slack_alertas
+  slack_configs:
+  - api_url: https://hooks.slack.com/services/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
+    channel: '#alertas'
