@@ -10,8 +10,8 @@ global:
       monitor: 'monitoring'
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
-#rule_files:
-#  - "alert.rules"
+rule_files:
+  - "alert.rules"
 
 scrape_configs:
   - job_name: 'prometheus'
