@@ -10,7 +10,7 @@ groups:
       summary: HIGH CPU USAGE WARNING ON '{{ $labels.instance }}'
   - alert: high_memory_usage_on_node
     expr: ((node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes)
-      * 100 > 80
+      * 100 > 85
     for: 5m
     annotations:
       description: '{{ $labels.instance }} is using a LOT of MEMORY. MEMORY usage
